@@ -1,5 +1,7 @@
 package view.gui;
 
+import model.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,7 @@ class TicTacToePanel extends JPanel {
 
     private int[] lastClick;
     private boolean updated;
+    private Player winner;
 
     TicTacToePanel() {
         super(new GridLayout(3, 3));
@@ -21,6 +24,7 @@ class TicTacToePanel extends JPanel {
         lastClick[0] = -1;
         lastClick[1] = -1;
         updated = false;
+        winner = null;
 
         buttons = new JButton[3][3];
         for(int i = 0; i < 3; i++)
@@ -43,7 +47,49 @@ class TicTacToePanel extends JPanel {
         return button;
     }
 
-    public boolean isUpdated() {
+    void setCompleted(Player winner) {
+        this.winner = winner;
+        removeAll();
+        repaint();
+    }
+
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        if(winner == Player.X)
+            ex(g);
+        if(winner == Player.O)
+            oh(g);
+    }
+
+    public void ex(Graphics g)
+    {
+        g.drawLine(0, 0, getWidth(), getHeight());
+        g.drawLine(0, getHeight(), getWidth(), 0);
+    }
+
+    public void oh(Graphics g)
+    {
+        g.drawOval(0, 0, getWidth(), getHeight());
+    }
+
+    void display(int[][] moves) {
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                switch(moves[i][j]) {
+                    case 1:
+                        buttons[i][j].setText("X");
+                        break;
+                    case 2:
+                        buttons[i][j].setText("O");
+                        break;
+                    default:
+                        buttons[i][j].setText("");
+                }
+            }
+    }
+
+    boolean isUpdated() {
         return updated;
     }
 

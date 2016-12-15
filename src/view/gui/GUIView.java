@@ -2,6 +2,7 @@ package view.gui;
 
 import controller.Data;
 import controller.Input;
+import controller.Packet;
 import view.NoInputException;
 import view.View;
 
@@ -64,7 +65,15 @@ public class GUIView extends JFrame implements View {
     }
 
     public void display(Data data) {
-
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                Packet p = data.getPacket(i, j);
+                if(p.isComplete())
+                    panels[i][j].setCompleted(p.getSubWinner());
+                else {
+                    panels[i][j].display(p.getSubBoard());
+                }
+            }
     }
 
     public boolean hasPlayer1() {
