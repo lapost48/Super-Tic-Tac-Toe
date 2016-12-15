@@ -8,12 +8,12 @@ import controller.Data;
  */
 public interface View {
 
-    public void display(Data data);
+    void display(Data data);
 
-    public Input getInput() throws NoInputException;
+    Input getInput() throws NoInputException;
 
-    public boolean hasPlayer1();
+    boolean hasPlayer1();
 
-    public boolean hasPlayer2();
+    boolean hasPlayer2();
 
 }
