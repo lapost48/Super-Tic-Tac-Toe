@@ -2,8 +2,9 @@ package controller;
 
 import model.Model;
 import model.Board;
+import view.NoInputException;
 import view.View;
-import view.GUIView;
+import view.gui.GUIView;
 
 /**
  * Created by lapost48 on 12/13/2016.
@@ -21,18 +22,21 @@ public class Controller {
 
         Data data = model.getData();
 
-        do {
+        while(!gameWin) {
             view.display(data);
 
             // Get input from proper sources
             Input input = null;
-            if(player1Turn)
-                if(view.hasPlayer1())
-                    input = view.getInput();
-            else
-                if(view.hasPlayer2())
-                    input = view.getInput();
-
+            try {
+                if(player1Turn)
+                    if (view.hasPlayer1())
+                        input = view.getInput();
+                else
+                    if (view.hasPlayer2())
+                        input = view.getInput();
+            } catch(NoInputException e) {
+                continue;
+            }
             if(input == null)
                 input = aiInput(data);
 
@@ -42,7 +46,7 @@ public class Controller {
             gameWin = data.hasWinner();
 
             toggleTurnPlayer();
-        }while(!gameWin);
+        }
 
         endGame(data);
 
@@ -57,7 +61,7 @@ public class Controller {
     }
 
     private static void endGame(Data data) {
-
+        System.out.println(data.getWinner());
     }
 
 }

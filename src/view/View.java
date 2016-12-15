@@ -10,7 +10,7 @@ public interface View {
 
     public void display(Data data);
 
-    public Input getInput();
+    public Input getInput() throws NoInputException;
 
     public boolean hasPlayer1();
 

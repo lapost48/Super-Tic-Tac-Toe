@@ -5,6 +5,14 @@ package controller;
  */
 public class Input {
 
+    private int[] lastClick;
 
+    public Input(int[] lastClick) {
+        this.lastClick = lastClick;
+    }
+
+    public int[] getLastClick() {
+        return lastClick;
+    }
 
 }
