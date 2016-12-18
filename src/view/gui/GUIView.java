@@ -50,9 +50,14 @@ public class GUIView extends JFrame implements View {
     }
 
     private boolean hasInput() {
-        for(TicTacToePanel[] row : panels)
-            for(TicTacToePanel panel : row)
-                newInput |= panel.isUpdated();
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                if(panels[i][j].isUpdated()) {
+                    newInput = true;
+                    lastClick = panels[i][j].getLastClick(i, j);
+                    panels[i][j].reset();
+                }
+            }
         return newInput;
     }
 

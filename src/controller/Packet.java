@@ -1,26 +1,24 @@
 package controller;
 
-import model.Player;
-
 /**
  * Created by lapost48 on 12/15/2016.
  */
 public class Packet {
 
     private int[][] tiles;
-    private Player winner;
+    private int winner;
 
-    public Packet(int[][] tiles, Player winner) {
+    public Packet(int[][] tiles, int winner) {
         this.tiles = tiles;
         this.winner = winner;
     }
 
-    public Player getSubWinner() {
+    public int getSubWinner() {
         return winner;
     }
 
     public boolean isComplete() {
-        return winner != null;
+        return winner != 0;
     }
 
     public int[][] getSubBoard() {

@@ -13,18 +13,44 @@ class MiniBoard {
     protected MiniBoard() {
         moveCount = 0;
         moves = new Player[3][3];
-        for(Player[] row : moves)
-            for(Player p : row)
-                p = Player.NONE;
-        winner = null;
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++)
+                moves[i][j] = Player.NONE;
+        winner = Player.NONE;
     }
 
     private void setWinner(Player win) {
         winner = win;
     }
 
-    public Player getWinner() {
-        return winner;
+    public int getWinner() {
+        switch(winner) {
+            case X:
+                return 1;
+            case O:
+                return 2;
+            case TIE:
+                return 3;
+            default:
+              return 0;
+        }
+    }
+
+    public void update(int i, int j, int value) {
+        moves[i][j] = Player.values()[value];
+        moveCount++;
+        checkWin();
+    }
+
+    public int[][] getValues() {
+        int[][] values = new int[3][3];
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++)
+                if(moves[i][j] == Player.NONE)
+                    values[i][j] = 0;
+                else
+                    values[i][j] = (moves[i][j] == Player.X) ? 1 :  2;
+        return values;
     }
 
     protected void checkWin() {

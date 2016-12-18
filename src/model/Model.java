@@ -10,6 +10,6 @@ public interface Model {
 
     public Data getData();
 
-    public void update(Input input);
+    public void update(Input input, boolean turn);
 
 }

@@ -16,7 +16,7 @@ class TicTacToePanel extends JPanel {
 
     private int[] lastClick;
     private boolean updated;
-    private Player winner;
+    private int winner;
 
     TicTacToePanel() {
         super(new GridLayout(3, 3));
@@ -24,7 +24,7 @@ class TicTacToePanel extends JPanel {
         lastClick[0] = -1;
         lastClick[1] = -1;
         updated = false;
-        winner = null;
+        winner = 0;
 
         buttons = new JButton[3][3];
         for(int i = 0; i < 3; i++)
@@ -39,27 +39,43 @@ class TicTacToePanel extends JPanel {
         JButton button = new JButton();
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                lastClick[0] = i;
-                lastClick[1] = j;
-                updated = true;
+                if(button.getText().equals("")) {
+                    lastClick[0] = i;
+                    lastClick[1] = j;
+                    updated = true;
+                }
             }
         });
         return button;
     }
 
-    void setCompleted(Player winner) {
+    int[] getLastClick(int i, int j) {
+        int[] click = lastClick;
+
+        click[0] += i * 3;
+        click[1] += j * 3;
+        return click;
+    }
+
+    void setCompleted(int winner) {
         this.winner = winner;
         removeAll();
         repaint();
     }
 
+    void reset() {
+        updated = false;
+    }
+
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if(winner == Player.X)
+        if(winner == 1)
             ex(g);
-        if(winner == Player.O)
+        if(winner == 2)
             oh(g);
+        if(winner == 3)
+            repaint();
     }
 
     public void ex(Graphics g)

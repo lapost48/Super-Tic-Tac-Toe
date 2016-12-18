@@ -28,19 +28,20 @@ public class Controller {
             // Get input from proper sources
             Input input = null;
             try {
-                if(player1Turn)
+                if(player1Turn) {
                     if (view.hasPlayer1())
                         input = view.getInput();
-                else
+                } else {
                     if (view.hasPlayer2())
                         input = view.getInput();
+                }
             } catch(NoInputException e) {
                 continue;
             }
             if(input == null)
                 input = aiInput(data);
 
-            model.update(input);
+            model.update(input, player1Turn);
 
             data = model.getData();
             gameWin = data.hasWinner();
