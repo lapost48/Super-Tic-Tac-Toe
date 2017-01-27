@@ -54,6 +54,7 @@ public class Controller {
     }
 
     private static Input aiInput(Data data) {
+        // Call python script and get two numbers from 0-8 that represents which square the AI wants to choose
         return null;
     }
 

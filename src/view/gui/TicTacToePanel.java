@@ -89,6 +89,12 @@ class TicTacToePanel extends JPanel {
         g.drawOval(0, 0, getWidth(), getHeight());
     }
 
+    void enableBoard(boolean enable) {
+        for(JButton[] row : buttons)
+            for(JButton b : row)
+                b.setEnabled(enable);
+    }
+
     void display(int[][] moves) {
         for(int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++) {

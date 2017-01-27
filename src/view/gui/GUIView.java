@@ -70,12 +70,17 @@ public class GUIView extends JFrame implements View {
     }
 
     public void display(Data data) {
+        int openBoard = data.openBoard();
         for(int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++) {
                 Packet p = data.getPacket(i, j);
                 if(p.isComplete())
                     panels[i][j].setCompleted(p.getSubWinner());
                 else {
+                    if(openBoard != 9 && openBoard != (3 * i) + j)
+                        panels[i][j].enableBoard(false);
+                    else
+                        panels[i][j].enableBoard(true);
                     panels[i][j].display(p.getSubBoard());
                 }
             }

@@ -10,10 +10,17 @@ public class Data {
     private int[][][][] subBoards;
     private int[][] subBoardWinners;
 
-    public Data(int[][][][] miniBoards, int[][] winners) {
+    private int openBoard;
+
+    public Data(int[][][][] miniBoards, int[][] winners, int openBoard) {
         winner = 0;
         subBoards = miniBoards;
         subBoardWinners = winners;
+        this.openBoard = openBoard;
+    }
+
+    public int openBoard() {
+        return openBoard;
     }
 
     public boolean hasWinner() {
